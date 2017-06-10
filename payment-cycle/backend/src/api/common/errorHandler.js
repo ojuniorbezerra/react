@@ -3,7 +3,7 @@ const _ = require('lodash')
 module.exports = (req, res, next) => {
     const bundle = res.locals.bundle
 
-    if(bundle){
+    if(bundle.errors){
         const erros = parseErros(bundle.erros)
         res.status(500).json(erros)
     }else{
