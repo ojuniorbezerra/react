@@ -19,16 +19,16 @@ BilligCycle.route('count', (req, res, next) => {
 
 BilligCycle.route('summary', (req, res, next) => {
     BilligCycle.aggregate({
-        $project: {credit: {$sum: "$credits.value"}, debit: {$sum: "$debts.value"}}
+        $project: {credit: {$sum: "$credits.value"}, debt: {$sum: "$debts.value"}}
     }, {
-        $group: {_id: null, credit: {$sum: "$credit"}, debit: {$sum: "$debit"}} 
+        $group: {_id: null, credit: {$sum: "$credit"}, debt: {$sum: "$debt"}} 
     }, {
-        $project: {_id: 0, credit: 1, debit: 1}
+        $project: {_id: 0, credit: 1, debt: 1}
     }, (error, result) => {
         if(error){
             res.status(500).json({erros: [error]})
         }else{
-            res.json(result[0] || {credit: 0, debit: 0})
+            res.json(result[0] || {credit: 0, debt: 0})
         }
     }
     )

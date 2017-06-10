@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-const URL = 'http://localhost:3003/api/todos'
-
-
+const URL = 'http://localhost:3003/api'
 
 export const getSummary = () => {
     const request = axios.put(`${URL}/billingCycles/summary`)
