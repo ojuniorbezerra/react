@@ -2,7 +2,7 @@ import axios from 'axios'
 import {toastr} from 'react-redux-toastr'
 import {reset as resetForm, initialize} from 'redux-form'
 import { showTabs, selectTab } from '../common/tab/tabActions'
-const INITIAL_VALUES = {}
+const INITIAL_VALUES = {credits:[{}], debts:[{}]}
 const URL = 'http://localhost:3003/api'
 
 export const getList = () => {
@@ -49,7 +49,7 @@ export const create = (values) => {
 
 export const remove = (values) => {
     return dispatch => {
-        axios.delete(`${URL}/billingCycles`, values)
+        axios.delete(`${URL}/billingCycles/${values._id}`, values)
         .then(rep => {
             toastr.success('Sucesso', 'Operação realizada com sucesso')
             dispatch(init())
@@ -88,6 +88,6 @@ export const init = () =>{
        showTabs('tabList', 'tabCreate'),
         selectTab('tabList'),
         getList(),
-        initialize('billingCycleForm',INITIAL_VALUES)
+        initialize('billingCycleForm', INITIAL_VALUES)
     ]
 }
